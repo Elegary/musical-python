@@ -3,9 +3,14 @@
 #  main.py created on 8/12/2020
 
 from tkinter import *
+from sound import *
+import  simpleaudio  as  sa
+import numpy as np
 
 def show_msg():
     print("Playing a sound")
+    generate_sound(440, 0.5)
+
 
 window = Tk()
 window.title("Musical Python")
