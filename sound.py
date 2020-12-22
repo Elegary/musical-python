@@ -1,6 +1,11 @@
 import  simpleaudio  as  sa
 import numpy as np
 
+def get_frequency_for_note(note):
+    note = note.lower()
+    notes = {"do": 264, "re": 297, "mi": 330, "fa": 352, "sol": 396, "la": 440, "si": 495}
+    return notes[note]
+
 def generate_sound(freq, duration):
     # get timesteps for each sample , " duration " is note duration in seconds
     sample_rate = 44100
