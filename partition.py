@@ -23,3 +23,23 @@ def read_database(path):
     # Return the partition list
     return partitions_list
 
+def parse_partition(partition):
+    elements = partition.split(" ")
+    for element in elements:
+        # Check if it is a note
+        if len(element) >= 3:
+            if len(element) == 4:
+                figure = element[3]
+                note = element[0:2]
+            else:
+                figure = element[2]
+                note = element[0:1]
+        # Check if it is a silence
+        if len(element) == 2 and element[0] == 'Z':
+            figure_silence = element[1]
+        # Check if it is a prolongation
+        if len(element) == 1 and element == 'p':
+            # mutliply the last figure duration * 1,5
+            pass
+
+
