@@ -4,6 +4,7 @@
 
 from tkinter import *
 from sound import *
+from partition import *
 from  time  import  sleep
 
 import  simpleaudio  as  sa
@@ -13,6 +14,8 @@ def show_msg():
     # Example for a LA noire
     print(get_frequency_for_note("LA"))
     print(get_duration_for_figure("n"))
+    read_database("partitions.txt")
+
 
 window = Tk()
 window.title("Musical Python")
