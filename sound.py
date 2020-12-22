@@ -1,3 +1,7 @@
+#  Copyright (c) Romain CAUSSIGNAC & Matthieu Vivier
+#  This is the part of musical-python
+#  sound.py created on 22/12/2020
+
 import  simpleaudio  as  sa
 import numpy as np
 
