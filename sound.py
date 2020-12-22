@@ -1,4 +1,4 @@
-#  Copyright (c) Romain CAUSSIGNAC & Matthieu Vivier
+#  Copyright (c) Romain CAUSSIGNAC & Matthieu VIVIER
 #  This is the part of musical-python
 #  sound.py created on 22/12/2020
 

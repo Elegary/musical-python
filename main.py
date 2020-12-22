@@ -1,6 +1,6 @@
 #  Copyright (c) Romain CAUSSIGNAC & Matthieu VIVIER
 #  This is the part of musical-python
-#  main.py created on 8/12/2020
+#  main.py created on 22/12/2020
 
 from tkinter import *
 from sound import *
