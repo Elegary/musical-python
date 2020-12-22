@@ -14,7 +14,7 @@ def show_msg():
     # Example for a LA noire
     print(get_frequency_for_note("LA"))
     print(get_duration_for_figure("n"))
-    read_database("partitions.txt")
+    print(read_database("partitions.txt"))
 
 
 window = Tk()
