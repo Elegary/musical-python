@@ -1,15 +1,16 @@
 #  Copyright (c) Romain CAUSSIGNAC & Matthieu VIVIER
-#  This the part of musical-python
+#  This is the part of musical-python
 #  main.py created on 8/12/2020
 
 from tkinter import *
 from sound import *
+from  time  import  sleep
+
 import  simpleaudio  as  sa
 import numpy as np
 
 def show_msg():
-    print("Playing a sound")
-    generate_sound(440, 0.5)
+    print(get_frequency_for_note("LA"))
 
 
 window = Tk()
