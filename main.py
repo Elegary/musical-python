@@ -10,8 +10,9 @@ import  simpleaudio  as  sa
 import numpy as np
 
 def show_msg():
+    # Example for a LA noire
     print(get_frequency_for_note("LA"))
-
+    print(get_duration_for_figure("n"))
 
 window = Tk()
 window.title("Musical Python")
