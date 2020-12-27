@@ -12,9 +12,12 @@ import numpy as np
 
 def show_msg():
     # Example for a LA noire
-    print(get_frequency_for_note("LA"))
-    print(get_duration_for_figure("n"))
-    print(read_database("partitions.txt"))
+    database = read_database("partitions.txt")
+    print(database)
+    title = database[6]["title"]
+    partition = parse_partition(database[6])
+    print(f"Currently playing : {title}")
+    play_partition_parsed(partition)
 
 
 window = Tk()

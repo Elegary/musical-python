@@ -2,6 +2,9 @@
 #  This is the part of musical-python
 #  partition.py
 
+from sound import *
+from  time  import  sleep
+
 def read_database(path):
     partitions_list = []
     # Opening with encoding utf-8 to support accents and special letters
@@ -24,22 +27,43 @@ def read_database(path):
     return partitions_list
 
 def parse_partition(partition):
-    elements = partition.split(" ")
+    partition_infos = []
+    elements = partition["infos"].split(" ")
+
     for element in elements:
         # Check if it is a note
         if len(element) >= 3:
             if len(element) == 4:
                 figure = element[3]
-                note = element[0:2]
+                note = element[0:3]
             else:
                 figure = element[2]
-                note = element[0:1]
+                note = element[0:2]
+            data = {"type": "note", "figure": figure, "note": note}
+            print(data)
         # Check if it is a silence
         if len(element) == 2 and element[0] == 'Z':
-            figure_silence = element[1]
+            figure = element[1]
+            data = {"type": "silence", "figure": figure}
         # Check if it is a prolongation
         if len(element) == 1 and element == 'p':
-            # mutliply the last figure duration * 1,5
-            pass
+            # data = mutliply the last figure duration * 1,5
+            data = {"type": "prolongation", "factor": 1.5}
+        partition_infos.append(data)
 
+    return partition_infos
 
+def play_partition_parsed(partition_parsed):
+    for i, val, in enumerate(partition_parsed):
+        if val["type"] == "note":
+            frequency = get_frequency_for_note(val["note"])
+            duration = get_duration_for_figure(val["figure"])
+            if i != len(partition_parsed) - 1 and partition_parsed[i + 1]["type"] == "prolongation":
+                duration *= partition_parsed[i + 1]["factor"]
+            generate_sound(frequency, duration * 0.001)
+
+        if val["type"] == "silence":
+            duration = get_duration_for_figure(val["figure"])
+            if i != len(partition_parsed) - 1 and partition_parsed[i + 1]["type"] == "prolongation":
+                duration *= partition_parsed[i + 1]["factor"]
+            sleep(duration * 0.001)
