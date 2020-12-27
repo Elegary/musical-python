@@ -40,7 +40,6 @@ def parse_partition(partition):
                 figure = element[2]
                 note = element[0:2]
             data = {"type": "note", "figure": figure, "note": note}
-            print(data)
         # Check if it is a silence
         if len(element) == 2 and element[0] == 'Z':
             figure = element[1]
