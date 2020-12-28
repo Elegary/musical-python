@@ -16,7 +16,7 @@ def get_duration_for_figure(figure):
     # We put the figure string to lower to prevent conflict
     figure = figure.lower()
     # Base duration of a "croche" in ms
-    base_duration = 50
+    base_duration = 25
     # Figures coefficient with "croche" for reference
     figures = {"c": 1, "n": 2, "b": 2*2, "r": 2*2*2}
     # Return the figure's duration

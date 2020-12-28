@@ -21,7 +21,6 @@ def show_msg(title):
     '''
     print(title)
 
-
 window = Tk()
 window.title("Musical Python")
 window.minsize(1000, 800)
@@ -42,9 +41,24 @@ canvas_app_bar.create_image(36, 36, image=logo_top_bar)
 canvas_app_bar.pack()
 canvas_app_bar.place(x=-5, y=5)
 
-frame_content = Frame(window, bg="#191414")
-frame_content.place(x=0, y=80)
-frame_content.pack(fill=BOTH)
+main_frame = Frame(window, bg="#191414")
+main_frame.place(x=0, y=80)
+main_frame.pack(fill=BOTH, expand=1)
+
+canvas_view = Canvas(main_frame, bd=0, highlightthickness=0)
+canvas_view.pack(side=LEFT, fill=BOTH, expand=1)
+
+scrollbar = Scrollbar(main_frame)
+scrollbar.pack(side=RIGHT, fill=Y)
+
+canvas_view.configure(yscrollcommand=scrollbar.set)
+canvas_view.bind("<Configure>", lambda e: canvas_view.configure(scrollregion = canvas_view.bbox("all")))
+
+frame_content = Frame(canvas_view, bg="#191414")
+
+def on_mousewheel(event):
+    canvas_view.yview_scroll(int(-1*(event.delta/120)), "units")
+
 
 database = read_database("partitions.txt")
 
@@ -62,5 +76,8 @@ for partition in database:
 
     my_frame.grid(pady=15, padx=73)
 
+scrollbar.config(command=canvas_view.yview)
+canvas_view.bind_all("<MouseWheel>", on_mousewheel)
+canvas_view.create_window((0,0), window=frame_content, anchor="nw")
 
 window.mainloop()
