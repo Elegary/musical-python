@@ -3,81 +3,25 @@
 #  main.py
 
 from tkinter import *
-from sound import *
-from partition import *
-from  time  import  sleep
 
-import  simpleaudio  as  sa
-import numpy as np
+from views import *
 
-def show_msg(title):
-    # Example for a LA noire
-    '''
-    database = read_database("partitions.txt")
-    #print(database) #renvoie les partitions dans une liste
-    for partition in database:
-        print(partition["title"])
-        sleep(1)
-    '''
-    print(title)
+from show_view import *
 
 window = Tk()
 window.title("Musical Python")
-window.minsize(1000, 800)
+window.minsize(1300, 800)
 window.iconbitmap("assets/music_note.ico")
 window.config(bg="#191414")
 
-top_bar = Frame(window, bg="#1DB954")
-top_bar.config(height=80)
-top_bar.pack(fill=X)
+Grid.rowconfigure(window, 0, weight=1)
+Grid.columnconfigure(window, 0, weight=1)
 
-title_top_bar = Label(top_bar, text="Musical Python", font=("Segoe UI", 30), fg="#FFFFFF", bg="#1DB954")
-title_top_bar.pack()
-title_top_bar.place(x=50, y=8)
-logo_top_bar = PhotoImage(file="assets/music_note.png")
+views = load_views(window)
 
-canvas_app_bar = Canvas(top_bar, width=50, height=50, bg="#1DB954", bd=0, highlightthickness=0)
-canvas_app_bar.create_image(36, 36, image=logo_top_bar)
-canvas_app_bar.pack()
-canvas_app_bar.place(x=-5, y=5)
+for key, view in views.items():
+    view.grid(row=0, column=0, sticky='nsew')
 
-main_frame = Frame(window, bg="#191414")
-main_frame.place(x=0, y=80)
-main_frame.pack(fill=BOTH, expand=1)
-
-canvas_view = Canvas(main_frame, bd=0, highlightthickness=0)
-canvas_view.pack(side=LEFT, fill=BOTH, expand=1)
-
-scrollbar = Scrollbar(main_frame)
-scrollbar.pack(side=RIGHT, fill=Y)
-
-canvas_view.configure(yscrollcommand=scrollbar.set)
-canvas_view.bind("<Configure>", lambda e: canvas_view.configure(scrollregion = canvas_view.bbox("all")))
-
-frame_content = Frame(canvas_view, bg="#191414")
-
-def on_mousewheel(event):
-    canvas_view.yview_scroll(int(-1*(event.delta/120)), "units")
-
-
-database = read_database("partitions.txt")
-
-for partition in database:
-    title = partition["title"]
-    parsed_partition = parse_partition(partition)
-
-    my_frame = Frame(frame_content, bg="#414141")
-    my_frame.config(width=1800, height=111)
-
-    title = Label(my_frame, text=title, font=("Segoe UI", 30), fg="#FFFFFF", bg="#414141", cursor="hand2")
-    title.bind("<Button-1>", lambda e,infos=parsed_partition:play_partition_parsed(infos))
-    title.pack()
-    title.place(x=25, y=23)
-
-    my_frame.grid(pady=15, padx=73)
-
-scrollbar.config(command=canvas_view.yview)
-canvas_view.bind_all("<MouseWheel>", on_mousewheel)
-canvas_view.create_window((0,0), window=frame_content, anchor="nw")
+show_view(views, "welcome_view")
 
 window.mainloop()

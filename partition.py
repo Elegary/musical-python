@@ -49,7 +49,7 @@ def parse_partition(partition):
             # data = mutliply the last figure duration * 1,5
             data = {"type": "prolongation", "factor": 1.5}
         partition_infos.append(data)
-
+    #print(partition_infos)
     return partition_infos
 
 def play_partition_parsed(partition_parsed):
