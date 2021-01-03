@@ -29,6 +29,24 @@ def read_database(path):
     # Return the partition list
     return partitions_list
 
+def save_new_partition(partition, path):
+    # Opening with encoding utf-8 to support accents and special letters
+    # Opening with "a+" mode let us to append to file, not overwrite the file and also read (to check the number)
+    f = open(path, "r", encoding='utf8')
+    # the second latest file contains the last number of partition
+    content = f.readlines()
+    i = -1
+    while not content[i].startswith("#"):
+        i -= 1
+    last_number = content[i].split("#")[1].split(" ")[0]
+    f.close()
+
+    f = open(path, "a", encoding='utf8')
+    print(f"#{int(last_number) + 1} {partition['title']}")
+    f.write(f"\n#{int(last_number) + 1} {partition['title']}\n")
+    f.write(partition["infos"])
+    f.close()
+
 def parse_partition(partition):
     partition_infos = []
     elements = partition["infos"].split(" ")

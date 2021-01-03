@@ -19,11 +19,12 @@ window.config(bg="#191414")
 Grid.rowconfigure(window, 0, weight=1)
 Grid.columnconfigure(window, 0, weight=1)
 
-# We load the views (assign each view to a key in a dictionnary
+# We load the views (and assign each view to a key in a dictionnary)
 views = load_views(window)
 
 # We use grid to have multiple views, and switch between the views
 for key, view in views.items():
+    # Check if is a Frame instance (view) or not
     if isinstance(view, Frame):
         view.grid(row=0, column=0, sticky='nsew')
 

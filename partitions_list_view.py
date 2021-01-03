@@ -11,8 +11,9 @@ from show_view import show_view
 
 def load_external_partition(views):
     path = filedialog.askopenfilename(initialdir=".", title="Select an external partition file", filetypes=[("Text files", "*.txt"),("All Files", "*.*")])
-    views["path"] = path
-    show_view(views, "external_partitions_list_view")
+    if path != '':
+        views["path"] = path
+        show_view(views, "external_partitions_list_view")
 
 def load_partition_view(views, partition):
     views["partition"] = partition
@@ -35,7 +36,7 @@ def load_partitions_list_view(window, views):
     canvas_app_bar.pack()
     canvas_app_bar.place(x=0, y=0)
 
-    btn_open = Button(top_bar, text="Open an external partition file", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: load_external_partition(views))
+    btn_open = Button(top_bar, text="Open an external database file", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: load_external_partition(views))
     btn_open.pack()
     btn_open.place(x=400, y=15)
 

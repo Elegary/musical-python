@@ -83,8 +83,17 @@ def load_partition_details_view(window, views):
     inverse_option.pack()
     inverse_option.place(x=200, y=15)
 
-    transpose_option = Checkbutton(actions, text="Apply transposition effect", font=("Segoe UI", 15), bg="#1DB954", activebackground="#1DB954", var=apply_transpose_effect)
+    transpose_option = Checkbutton(actions, text="Apply transposition effect (k=5)", font=("Segoe UI", 15), bg="#1DB954", activebackground="#1DB954", var=apply_transpose_effect)
     transpose_option.pack()
     transpose_option.place(x=200, y=60)
+
+    if not views["is_in_database"]:
+        external_label = Label(actions, text="External partition detected", font=("Segoe UI", 18), fg="white", bg="#1DB954")
+        external_label.pack()
+        external_label.place(x=700, y=20)
+
+        btn_save =  Button(actions, text="Save this partition in the Database", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: save_new_partition(views["partition"], "partitions.txt"))
+        btn_save.pack()
+        btn_save.place(x=700, y=60)
 
     return container
