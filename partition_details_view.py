@@ -4,8 +4,23 @@
 
 from tkinter import *
 
+from partition import *
 from show_view import show_view
 
+
+apply_transpose_effect = False
+apply_inversion_effect = False
+
+
+def pre_play_partition(partition_parsed):
+    print(apply_transpose_effect)
+    if apply_inversion_effect:
+        partition_parsed = inverse_partition(partition_parsed)
+
+    if apply_transpose_effect:
+        partition_parsed = transpose_partition(partition_parsed)
+
+    play_partition_parsed(partition_parsed)
 
 def load_partition_details_view(window, views):
     container = Frame(window, bg="#191414")
@@ -35,12 +50,15 @@ def load_partition_details_view(window, views):
     main_frame.place(x=0, y=80)
     main_frame.pack(fill=BOTH, expand=1)
 
-    title_label = Label(container, text=views["partition"]["title"], font=("Segoe UI", 30), fg="#FFFFFF", bg="#191414")
-    title_label.pack(pady=10)
+    title_label = Label(main_frame, text="Title : " + views["partition"]["title"], font=("Segoe UI", 30), fg="#FFFFFF", bg="#191414")
+    title_label.pack()
 
-    details = Frame(container, bg="#1DB954")
+    infos = Label(main_frame, text="Partition info : ", font=("Segoe UI", 25), fg="#FFFFFF", bg="#191414")
+    infos.pack()
+
+    details = Frame(main_frame, bg="#1DB954")
     details.config(width=1500, height=500)
-    details.pack(padx=15, pady=50)
+    details.pack(padx=15, pady=15)
 
     partition_label = Label(details, text=views["partition"]["infos"], font=("Segoe UI",30), fg="white", bg="#1DB954", wraplengt=1000, height=10)
     partition_label.config(width=50)
@@ -49,5 +67,20 @@ def load_partition_details_view(window, views):
     actions = Frame(container, bg="#1DB954")
     actions.config(width=1500, height=130)
     actions.pack(padx=15, pady=50)
+
+    partition_parsed = parse_partition(views["partition"])
+
+    btn_back = Button(actions, text="Play", font=("Segoe UI", 18), fg="#FFFFFF", bg="#1DB954", command=lambda: pre_play_partition(partition_parsed))
+    btn_back.config(height=2, width=10)
+    btn_back.pack()
+    btn_back.place(x=30, y=20)
+
+    inverse_option = Checkbutton(actions, text="Apply inversion effect", font=("Segoe UI", 15), bg="#1DB954", activebackground="#1DB954", var=apply_inversion_effect)
+    inverse_option.pack()
+    inverse_option.place(x=200, y=15)
+
+    transpose_option = Checkbutton(actions, text="Apply transposition effect", font=("Segoe UI", 15), bg="#1DB954", activebackground="#1DB954", var=apply_transpose_effect)
+    transpose_option.pack()
+    transpose_option.place(x=200, y=60)
 
     return container
