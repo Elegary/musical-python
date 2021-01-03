@@ -1,9 +1,12 @@
 #  Copyright (c) Romain CAUSSIGNAC & Matthieu VIVIER
 #  This is the part of musical-python
 #  partition.py
+import copy
 
 from sound import *
 from  time  import  sleep
+
+notes_list = ["do", "re", "mi", "fa", "sol", "la", "si"]
 
 def read_database(path):
     partitions_list = []
@@ -39,7 +42,7 @@ def parse_partition(partition):
             else:
                 figure = element[2]
                 note = element[0:2]
-            data = {"type": "note", "figure": figure, "note": note}
+            data = {"type": "note", "figure": figure, "note": note.lower()}
         # Check if it is a silence
         if len(element) == 2 and element[0] == 'Z':
             figure = element[1]
@@ -53,6 +56,8 @@ def parse_partition(partition):
     return partition_infos
 
 def play_partition_parsed(partition_parsed):
+    print(markov_matrix(partition_parsed))
+    print(inverse_partition(partition_parsed))
     for i, val, in enumerate(partition_parsed):
         if val["type"] == "note":
             frequency = get_frequency_for_note(val["note"])
@@ -66,3 +71,50 @@ def play_partition_parsed(partition_parsed):
             if i != len(partition_parsed) - 1 and partition_parsed[i + 1]["type"] == "prolongation":
                 duration *= partition_parsed[i + 1]["factor"]
             sleep(duration * 0.001)
+
+
+def markov_matrix(partition_parsed):
+    markov_matrix = []
+
+    for note in notes_list:
+        stats = [0] * len(notes_list)
+
+        for i, element in enumerate(partition_parsed):
+            if element["type"] == "note" and element["note"] == note and i != len(partition_parsed) - 1:
+                j = i + 1
+
+                while j != len(partition_parsed) - 1 and partition_parsed[j]["type"] != "note":
+                    j += 1
+
+                if partition_parsed[j]["type"] == "note":
+                    index = notes_list.index(partition_parsed[j]["note"])
+                    stats[index] += 1
+
+        markov_matrix.append(stats)
+
+    return markov_matrix
+
+def generate_with_markov(markov_matrix):
+    pass
+
+def transpose_partition(partition_parsed, k):
+    partition_transposed = copy.deepcopy(partition_parsed)
+
+    for element in partition_transposed:
+        if element["type"] == "note":
+            index = notes_list.index(element["note"])
+            new_index = (index + k) % len(notes_list)
+            element["note"] = notes_list[new_index]
+
+    return partition_transposed
+
+def inverse_partition(partition_parsed):
+    partition_inverted = copy.deepcopy(partition_parsed)
+
+    for element in partition_inverted:
+        if element["type"] == "note":
+            index = notes_list.index(element["note"])
+            new_index  = (len(notes_list) - index) % len(notes_list)
+            element["note"] = notes_list[new_index]
+
+    return partition_inverted
