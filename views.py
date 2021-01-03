@@ -2,9 +2,10 @@
 #  This is the part of musical-python
 #  views.py
 
+from about_view import load_about_view
 from partitions_list_view import load_partitions_list_view
 from welcome_view import load_welcome_view
-from external_partitions_list import load_external_partitions_list_view
+from external_partitions_list_view import load_external_partitions_list_view
 from partition_details_view import load_partition_details_view
 
 views = {}
@@ -16,6 +17,7 @@ def load_views(window):
     views["partition"] = {"title": "Title", "infos": "Data"}
     views["is_in_database"] = True
     views["welcome_view"] = load_welcome_view(window, views)
+    views["about_view"] = load_about_view(window, views)
     views["partition_details_view"] = load_partition_details_view(window, views)
     views["external_partitions_list_view"] = load_external_partitions_list_view(window, views)
     views["partitions_list_view"] = load_partitions_list_view(window, views)

@@ -40,7 +40,7 @@ def load_partitions_list_view(window, views):
     btn_open.pack()
     btn_open.place(x=400, y=15)
 
-    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414")
+    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: show_view(views, "about_view"))
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
     main_frame = Frame(container, bg="#191414")
