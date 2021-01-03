@@ -70,12 +70,12 @@ def load_external_partitions_list_view(window, views):
         title.pack()
         title.place(x=25, y=23)
 
-        img = PhotoImage(file="assets/book.png")
+        #img = PhotoImage(file="assets/book.png")
 
-        title_bis = Canvas(my_frame, width=64, height=64, bg="#414141")
-        title_bis.create_image(64, 64, image=img)
-        title_bis.pack()
-        title_bis.place(x=555, y=23)
+        #title_bis = Canvas(my_frame, width=64, height=64, bg="#414141")
+        #title_bis.create_image(64, 64, image=img)
+        #title_bis.pack()
+        #title_bis.place(x=555, y=23)
 
         my_frame.grid(pady=15, padx=50)
 
