@@ -7,23 +7,27 @@ from tkinter import *
 from partition import *
 from show_view import show_view
 
-
-apply_transpose_effect = False
-apply_inversion_effect = False
-
-
 def pre_play_partition(partition_parsed):
-    print(apply_transpose_effect)
-    if apply_inversion_effect:
+    if apply_inversion_effect.get():
         partition_parsed = inverse_partition(partition_parsed)
 
-    if apply_transpose_effect:
-        partition_parsed = transpose_partition(partition_parsed)
+    if apply_transpose_effect.get():
+        partition_parsed = transpose_partition(partition_parsed, k=5)
 
     play_partition_parsed(partition_parsed)
 
 def load_partition_details_view(window, views):
     container = Frame(window, bg="#191414")
+
+    # Using global modifier lets us to access the options Boolean outside the current function
+    global apply_transpose_effect
+    apply_transpose_effect = BooleanVar()
+    apply_transpose_effect.set(False)
+
+    global apply_inversion_effect
+    apply_inversion_effect = BooleanVar()
+    apply_inversion_effect.set(False)
+
 
     top_bar = Frame(container, bg="#1DB954")
     top_bar.pack(fill=X)
@@ -39,10 +43,10 @@ def load_partition_details_view(window, views):
     canvas_app_bar.pack()
     canvas_app_bar.place(x=0, y=0)
 
-    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954")
+    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414")
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
-    btn_back = Button(top_bar, text="Home", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954", command=lambda: show_view(views, "partitions_list_view"))
+    btn_back = Button(top_bar, text="Home", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: show_view(views, "partitions_list_view"))
     btn_back.pack()
     btn_back.place(x=400, y=15)
 
@@ -70,7 +74,7 @@ def load_partition_details_view(window, views):
 
     partition_parsed = parse_partition(views["partition"])
 
-    btn_back = Button(actions, text="Play", font=("Segoe UI", 18), fg="#FFFFFF", bg="#1DB954", command=lambda: pre_play_partition(partition_parsed))
+    btn_back = Button(actions, text="Play", font=("Segoe UI", 18), fg="#FFFFFF", bg="#191414", command=lambda: pre_play_partition(partition_parsed))
     btn_back.config(height=2, width=10)
     btn_back.pack()
     btn_back.place(x=30, y=20)

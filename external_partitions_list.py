@@ -29,10 +29,10 @@ def load_external_partitions_list_view(window, views):
     canvas_app_bar.pack()
     canvas_app_bar.place(x=0, y=0)
 
-    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954")
+    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414")
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
-    btn_back = Button(top_bar, text="Home", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954", command=lambda: show_view(views, "partitions_list_view"))
+    btn_back = Button(top_bar, text="Home", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: show_view(views, "partitions_list_view"))
     btn_back.pack()
     btn_back.place(x=400, y=15)
 

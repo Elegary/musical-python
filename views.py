@@ -21,6 +21,7 @@ def load_views(window):
 
     return views
 
+# These two functions forces the view to be re rendered with the new values
 def updatePath():
     print(views["path"])
     views["external_partitions_list_view"] = load_external_partitions_list_view(current_window, views)

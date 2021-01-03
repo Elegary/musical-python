@@ -35,11 +35,11 @@ def load_partitions_list_view(window, views):
     canvas_app_bar.pack()
     canvas_app_bar.place(x=0, y=0)
 
-    btn_open = Button(top_bar, text="Open an external partition file", font=("Segoe UI", 15), fg="#FFFFFF", bg="#1DB954", command=lambda: load_external_partition(views))
+    btn_open = Button(top_bar, text="Open an external partition file", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: load_external_partition(views))
     btn_open.pack()
     btn_open.place(x=400, y=15)
 
-    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954")
+    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414")
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
     main_frame = Frame(container, bg="#191414")
