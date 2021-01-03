@@ -4,6 +4,7 @@
 
 from tkinter import *
 from show_view import *
+from PIL import ImageTk, Image
 
 def load_welcome_view(window, views):
     container = Frame(window)
@@ -14,5 +15,9 @@ def load_welcome_view(window, views):
 
     welcome_label.pack(fill=BOTH, expand=1)
     btn_get_started.pack(expand=1)
+
+    img = ImageTk.PhotoImage(file=r"book.png")
+    title_bis = Label(container, image=img, bg="#1DB954")
+    title_bis.pack()
 
     return container

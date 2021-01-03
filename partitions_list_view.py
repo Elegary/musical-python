@@ -3,25 +3,40 @@
 #  partitions_list.py
 
 from tkinter import *
+from tkinter import filedialog
 
 from partition import *
 
-def load_partitions_lists_view(window, views):
+from show_view import show_view
+
+def load_external_partition(views):
+    path = filedialog.askopenfilename(initialdir=".", title="Select an external partition file", filetypes=[("Text files", "*.txt"),("All Files", "*.*")])
+    views["path"] = path
+    show_view(views, "external_partitions_list_view")
+
+def load_partitions_list_view(window, views):
     container = Frame(window)
 
     top_bar = Frame(container, bg="#1DB954")
-    top_bar.config(height=80)
     top_bar.pack(fill=X)
+    top_bar.config(height=80)
 
     title_top_bar = Label(top_bar, text="Musical Python", font=("Segoe UI", 30), fg="#FFFFFF", bg="#1DB954")
     title_top_bar.pack()
     title_top_bar.place(x=50, y=8)
     logo_top_bar = PhotoImage(file="assets/music_note.png")
 
-    canvas_app_bar = Canvas(top_bar, width=50, height=50, bg="#1DB954")
+    canvas_app_bar = Canvas(top_bar, width=30, height=30, bg="#1DB954")
     canvas_app_bar.create_image(36, 36, image=logo_top_bar)
     canvas_app_bar.pack()
-    canvas_app_bar.place(x=-5, y=5)
+    canvas_app_bar.place(x=0, y=0)
+
+    btn_open = Button(top_bar, text="Open an external partition file", font=("Segoe UI", 15), fg="#FFFFFF", bg="#1DB954", command=lambda: load_external_partition(views))
+    btn_open.pack()
+    btn_open.place(x=400, y=15)
+
+    btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954")
+    btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
     main_frame = Frame(container, bg="#191414")
     main_frame.place(x=0, y=80)
@@ -29,6 +44,7 @@ def load_partitions_lists_view(window, views):
 
     canvas_view = Canvas(main_frame, bd=0, highlightthickness=0)
     canvas_view.pack(side=LEFT, fill=BOTH, expand=1)
+    canvas_view.config(bg="#191414")
 
     scrollbar = Scrollbar(main_frame)
     scrollbar.pack(side=RIGHT, fill=Y)
@@ -55,6 +71,13 @@ def load_partitions_lists_view(window, views):
         title.bind("<Button-1>", lambda e,infos=parsed_partition:play_partition_parsed(infos))
         title.pack()
         title.place(x=25, y=23)
+
+        img = PhotoImage(file="assets/book.png")
+
+        title_bis = Canvas(my_frame, width=64, height=64, bg="#414141")
+        title_bis.create_image(64, 64, image=img)
+        title_bis.pack()
+        title_bis.place(x=555, y=23)
 
         my_frame.grid(pady=15, padx=50)
 
