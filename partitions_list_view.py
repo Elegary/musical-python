@@ -14,6 +14,10 @@ def load_external_partition(views):
     views["path"] = path
     show_view(views, "external_partitions_list_view")
 
+def load_partition_view(views, partition):
+    views["partition"] = partition
+    show_view(views, "partition_details_view")
+
 def load_partitions_list_view(window, views):
     container = Frame(window)
 
@@ -68,7 +72,7 @@ def load_partitions_list_view(window, views):
         my_frame.config(width=1804, height=111)
 
         title = Label(my_frame, text=title, font=("Segoe UI", 30), fg="#FFFFFF", bg="#414141", cursor="hand2")
-        title.bind("<Button-1>", lambda e,infos=parsed_partition:play_partition_parsed(infos))
+        title.bind("<Button-1>", lambda e,partition=partition:load_partition_view(views, partition))
         title.pack()
         title.place(x=25, y=23)
 

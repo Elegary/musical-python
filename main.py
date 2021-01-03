@@ -24,10 +24,10 @@ views = load_views(window)
 
 # We use grid to have multiple views, and switch between the views
 for key, view in views.items():
-    if key != "path":
+    if isinstance(view, Frame):
         view.grid(row=0, column=0, sticky='nsew')
 
 # We show the "Welcome" screen to the user
-show_view(views, "welcome_view")
+show_view(views, "partition_details_view")
 
 window.mainloop()

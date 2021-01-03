@@ -7,6 +7,10 @@ from tkinter import *
 from partition import *
 from show_view import show_view
 
+def load_partition_view(views, partition):
+    views["partition"] = partition
+    show_view(views, "partition_details_view")
+
 
 def load_external_partitions_list_view(window, views):
     container = Frame(window)
@@ -28,7 +32,7 @@ def load_external_partitions_list_view(window, views):
     btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954")
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
-    btn_back = Button(top_bar, text="Back", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954", command=lambda: show_view(views, "partitions_list_view"))
+    btn_back = Button(top_bar, text="Home", font=("Segoe UI", 13), fg="#FFFFFF", bg="#1DB954", command=lambda: show_view(views, "partitions_list_view"))
     btn_back.pack()
     btn_back.place(x=400, y=15)
 
@@ -62,7 +66,7 @@ def load_external_partitions_list_view(window, views):
         my_frame.config(width=1804, height=111)
 
         title = Label(my_frame, text=title, font=("Segoe UI", 30), fg="#FFFFFF", bg="#414141", cursor="hand2")
-        title.bind("<Button-1>", lambda e,infos=parsed_partition:play_partition_parsed(infos))
+        title.bind("<Button-1>", lambda e,partition=partition:load_partition_view(views, partition))
         title.pack()
         title.place(x=25, y=23)
 
