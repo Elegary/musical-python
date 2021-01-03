@@ -42,7 +42,6 @@ def save_new_partition(partition, path):
     f.close()
 
     f = open(path, "a", encoding='utf8')
-    print(f"#{int(last_number) + 1} {partition['title']}")
     f.write(f"\n#{int(last_number) + 1} {partition['title']}\n")
     f.write(partition["infos"])
     f.close()
@@ -74,8 +73,6 @@ def parse_partition(partition):
     return partition_infos
 
 def play_partition_parsed(partition_parsed):
-    print(markov_matrix(partition_parsed))
-    print(inverse_partition(partition_parsed))
     for i, val, in enumerate(partition_parsed):
         if val["type"] == "note":
             frequency = get_frequency_for_note(val["note"])
