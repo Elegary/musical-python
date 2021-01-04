@@ -2,6 +2,7 @@
 #  This is the part of musical-python
 #  partition.py
 import copy
+import random
 
 from sound import *
 from  time  import  sleep
@@ -73,6 +74,9 @@ def parse_partition(partition):
     return partition_infos
 
 def play_partition_parsed(partition_parsed):
+    #print(markov_matrix(partition_parsed))
+    markov = markov_matrix(partition_parsed)
+    #print(generate_with_markov(markov, len(partition_parsed)))
     for i, val, in enumerate(partition_parsed):
         if val["type"] == "note":
             frequency = get_frequency_for_note(val["note"])
@@ -109,8 +113,39 @@ def markov_matrix(partition_parsed):
 
     return markov_matrix
 
-def generate_with_markov(markov_matrix):
-    pass
+def generate_with_markov(markov_matrix, number_of_notes):
+    # First get the max occurrences
+    index_note_with_max_occurences = 0 # do
+    max_occurences = 0
+
+    for i, note_stats in enumerate(markov_matrix):
+        occurrences = 0
+
+        for j, note_after_number in enumerate(note_stats):
+            occurrences += note_after_number
+
+        if occurrences > max_occurences:
+            index_note_with_max_occurences = i
+            max_occurences = occurrences
+
+    #first_note = notes_list[index_note_with_max_occurences]
+    partition_generated = []
+    for note in range(number_of_notes + 1):
+        note = {"type": "note", "figure": "n", "note": generate_next_note(markov_matrix, index_note_with_max_occurences)}
+        partition_generated.append(note)
+
+    return partition_generated
+
+
+def generate_next_note(markov_matrix, note_index):
+    array_successor = []
+    for index, note_after_number in enumerate(markov_matrix[note_index]):
+        if note_after_number > 0:
+            to_insert = [notes_list[index]] * note_after_number
+            array_successor.extend(to_insert)
+
+    return array_successor[random.randint(0, len(array_successor) - 1)]
+
 
 def transpose_partition(partition_parsed, k):
     partition_transposed = copy.deepcopy(partition_parsed)
