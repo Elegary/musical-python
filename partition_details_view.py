@@ -65,7 +65,7 @@ def load_partition_details_view(window, views):
 
     details = Frame(main_frame, bg="#1DB954")
     details.config(width=1600, height=500)
-    details.pack(padx=30, pady=30)
+    details.pack(padx=15, pady=15)
 
     partition_label = Label(details, text=views["partition"]["infos"], font=("Segoe UI",20), fg="white", bg="#1DB954", wraplengt=1250, height=6)
     partition_label.config(width=85)
