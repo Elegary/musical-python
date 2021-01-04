@@ -67,7 +67,6 @@ def load_partitions_list_view(window, views):
 
     for partition in database:
         title = partition["title"]
-        parsed_partition = parse_partition(partition)
 
         my_frame = Frame(frame_content, bg="#414141")
         my_frame.config(width=1804, height=111)
@@ -84,7 +83,7 @@ def load_partitions_list_view(window, views):
         #title_bis.pack()
         #title_bis.place(x=555, y=23)
 
-        my_frame.grid(pady=15, padx=50)
+        my_frame.pack(pady=15, padx=50)
 
     scrollbar.config(command=canvas_view.yview)
     canvas_view.bind_all("<MouseWheel>", on_mousewheel)
