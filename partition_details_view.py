@@ -64,11 +64,11 @@ def load_partition_details_view(window, views):
     infos.pack()
 
     details = Frame(main_frame, bg="#1DB954")
-    details.config(width=1500, height=500)
-    details.pack(padx=15, pady=15)
+    details.config(width=1600, height=500)
+    details.pack(padx=50, pady=50)
 
-    partition_label = Label(details, text=views["partition"]["infos"], font=("Segoe UI",20), fg="white", bg="#1DB954", wraplengt=1000, height=5)
-    partition_label.config(width=70)
+    partition_label = Label(details, text=views["partition"]["infos"], font=("Segoe UI",20), fg="white", bg="#1DB954", wraplengt=1250, height=6)
+    partition_label.config(width=85)
     partition_label.pack()
 
     actions = Frame(container, bg="#1DB954")
