@@ -5,48 +5,16 @@
 from tkinter import *
 from tkinter import filedialog
 
+from actions import markov_action, load_partition_view
 from partition import *
 
 from show_view import show_view
-
-def markov_action(views):
-    db = read_database(views["path"])
-    all_partitions = {"title": "", "infos": ""}
-
-    nbr_notes = 0
-
-    for partition in db:
-        parsed = parse_partition(partition)
-        # Counting number of notes
-        for element in parsed:
-            if element["type"] == "note":
-                nbr_notes += 1
-        all_partitions["infos"] += partition["infos"] + " "
-
-    all_partitions["infos"] = all_partitions["infos"].rstrip()
-
-    partition_parsed = parse_partition(all_partitions)
-    matrix = markov_matrix(partition_parsed)
-
-    length = int(nbr_notes / len(db))
-
-    new_partition = {}
-    new_partition["infos"] = generate_with_markov(matrix, length)
-    new_partition["title"] = "[Generated with Markov] Style from " +  views["path"]
-
-    views["is_in_database"] = False
-    views["partition"] = new_partition
-    show_view(views, "partition_details_view")
 
 def load_external_partition(views):
     path = filedialog.askopenfilename(initialdir=".", title="Select an external partition file", filetypes=[("Text files", "*.txt"),("All Files", "*.*")])
     if path != '':
         views["path"] = path
         show_view(views, "external_partitions_list_view")
-
-def load_partition_view(views, partition):
-    views["partition"] = partition
-    show_view(views, "partition_details_view")
 
 def load_partitions_list_view(window, views):
     container = Frame(window)

@@ -4,13 +4,9 @@
 
 from tkinter import *
 
+from actions import load_partition_view, markov_action
 from partition import *
 from show_view import show_view
-
-def load_partition_view(views, partition):
-    views["partition"] = partition
-    show_view(views, "partition_details_view")
-
 
 def load_external_partitions_list_view(window, views):
     container = Frame(window)
@@ -35,6 +31,10 @@ def load_external_partitions_list_view(window, views):
     btn_back = Button(top_bar, text="Home", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: show_view(views, "partitions_list_view"))
     btn_back.pack()
     btn_back.place(x=600, y=15)
+
+    btn_markov = Button(top_bar, text="Generate a partition in the\n style of this Database", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
+    btn_markov.pack()
+    btn_markov.place(x=900, y=10)
 
     main_frame = Frame(container, bg="#191414")
     main_frame.place(x=0, y=80)

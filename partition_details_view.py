@@ -13,7 +13,7 @@ def markov_action(views):
     matrix = markov_matrix(partition_parsed)
     new_partition = {}
     new_partition["infos"] = generate_with_markov(matrix, len(partition_parsed))
-    new_partition["title"] = "[Generated with Markov] " + partition["title"]
+    new_partition["title"] = "[Generated with Markov] From style of " + partition["title"]
     views["is_in_database"] = False
     views["partition"] = new_partition
     show_view(views, "partition_details_view")
