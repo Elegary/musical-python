@@ -30,7 +30,8 @@ def pre_play_partition(partition_parsed):
         partition_parsed = inverse_partition(partition_parsed)
 
     if apply_transpose_effect.get():
-        partition_parsed = transpose_partition(partition_parsed, k=5)
+        k = int(k_entry.get())
+        partition_parsed = transpose_partition(partition_parsed, k=k)
 
     # Play partition in a Thread to not block the program execution
     def launch_in_thread():
@@ -114,18 +115,22 @@ def load_partition_details_view(window, views):
     inverse_option.pack()
     inverse_option.place(x=200, y=15)
 
-    transpose_option = Checkbutton(actions, text="Apply transposition effect (k=5)", font=("Segoe UI", 15), bg="#1DB954", activebackground="#1DB954", var=apply_transpose_effect)
+    transpose_option = Checkbutton(actions, text="Apply transposition effect of k =", font=("Segoe UI", 15), bg="#1DB954", activebackground="#1DB954", var=apply_transpose_effect)
     transpose_option.pack()
     transpose_option.place(x=200, y=60)
+
+    global k_entry
+    k_entry = Entry(actions, width=5)
+    k_entry.place(x=510, y=73)
 
     if not views["is_in_database"]:
         external_label = Label(actions, text="External partition detected", font=("Segoe UI", 18), fg="white", bg="#1DB954")
         external_label.pack()
-        external_label.place(x=525, y=20)
+        external_label.place(x=550, y=20)
 
         btn_save =  Button(actions, text="Save this partition in the Database", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: save_new_partition(views["partition"], "partitions.txt"))
         btn_save.pack()
-        btn_save.place(x=525, y=60)
+        btn_save.place(x=550, y=60)
 
     btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action_single(views, markov_option.get()))
     btn_markov.pack()
