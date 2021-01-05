@@ -15,6 +15,7 @@ def show_view(views, view_name):
 
     elif view_name == "partitions_list_view":
         views["is_in_database"] = True
+        views["path"] = "partitions.txt"
         vi.update_partitions_list_view()
 
     view = views[view_name]
