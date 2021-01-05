@@ -1,7 +1,7 @@
 #  Copyright (c) Romain CAUSSIGNAC & Matthieu VIVIER
 #  This is the part of musical-python
 #  partition_details_view.py
-
+from threading import Thread
 from tkinter import *
 from tkinter.messagebox import askyesnocancel
 
@@ -32,7 +32,12 @@ def pre_play_partition(partition_parsed):
     if apply_transpose_effect.get():
         partition_parsed = transpose_partition(partition_parsed, k=5)
 
-    play_partition_parsed(partition_parsed)
+    # Play partition in a Thread to not block the program execution
+    def launch_in_thread():
+        play_partition_parsed(partition_parsed)
+
+    thread = Thread(target=launch_in_thread)
+    thread.start()
 
 def load_partition_details_view(window, views):
     container = Frame(window, bg="#191414")
