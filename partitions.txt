@@ -34,3 +34,5 @@ SOLn SOLn SOLn SOLn LAn SOLn REn DOn REn DOn SIn SOLn SOLn SOLn SOLn SOLn REn DO
 SOLn SOLn SOLn SOLn SOLn DOn SOLn MIn DOn REn DOn SIn LAn SOLn DOn SIn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn DOn SOLn SOLn SOLn REn DOn SOLn SOLn SOLn
 #18 [Generated with Markov V1] Style from partitions.txt
 REn MIn SOLn REn LAn LAn FAn LAn FAn LAn SOLn SIn DOn DOn SIn SIn SIn SOLn FAn REn LAn LAn REn SIn SOLn REn FAn SOLn MIn MIn SOLn SOLn MIn DOn REn SIn DOn
+#19 [Generated with Markov V2] Style from partitions.txt
+SOLn LAn SOLn LAn SOLn SOLn DOn SIn REn REn REn MIn MIn REn SOLn SOLn LAn LAn SIn SOLn SOLn SOLn SOLn SIn SIn LAn LAn SOLn SOLn SIn SIn SOLn SOLn SOLn SOLn DOn SOLn

@@ -75,11 +75,14 @@ def parse_partition(partition):
     return partition_infos
 
 def play_partition_parsed(partition_parsed):
+    # TURTLE ANIMATION OK, BUT IT WAS SLOVWER, SO TO ENABLE ANIMATION JUST UNCOMMENT THE COMMENTED LINES IN THIS FUNCTION
+    '''
     s = turtle.getscreen()
     d = 0
     turtle.bgcolor("grey")
     colors = ["green", "orange", "yellow", "blue", "purple", "red"]
     x = 0
+    '''
 
     for i, val, in enumerate(partition_parsed):
         if val["type"] == "note":
@@ -88,6 +91,7 @@ def play_partition_parsed(partition_parsed):
             if i != len(partition_parsed) - 1 and partition_parsed[i + 1]["type"] == "prolongation":
                 duration *= partition_parsed[i + 1]["factor"]
             generate_sound(frequency, duration * 0.001)
+            '''
             d += 1
             turtle.up()
             turtle.color(colors[x % 6])
@@ -96,6 +100,7 @@ def play_partition_parsed(partition_parsed):
             turtle.forward(x)
             turtle.left(59)
             x = (x + 1) % 360
+            '''
 
         if val["type"] == "silence":
             duration = get_duration_for_figure(val["figure"])
