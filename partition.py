@@ -128,13 +128,14 @@ def generate_with_markov(markov_matrix, number_of_notes):
             index_note_with_max_occurences = i
             max_occurences = occurrences
 
-    #first_note = notes_list[index_note_with_max_occurences]
-    partition_generated = []
-    for note in range(number_of_notes + 1):
-        note = {"type": "note", "figure": "n", "note": generate_next_note(markov_matrix, index_note_with_max_occurences)}
-        partition_generated.append(note)
+    note = notes_list[index_note_with_max_occurences]
+    partition_generated = [note.upper() + "n"]
+    for i in range(number_of_notes - 1):
+        note_index = notes_list.index(note)
+        note = generate_next_note(markov_matrix, note_index)
+        partition_generated.append(note.upper() + "n")
 
-    return partition_generated
+    return " ".join(partition_generated)
 
 
 def generate_next_note(markov_matrix, note_index):

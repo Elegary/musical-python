@@ -7,8 +7,15 @@ from tkinter import *
 from partition import *
 from show_view import show_view
 
-def markov_action():
-    pass
+def markov_action(views):
+    partition = views["partition"]
+    partition_parsed = parse_partition(partition)
+    matrix = markov_matrix(partition_parsed)
+    new_partition = {}
+    new_partition["infos"] = generate_with_markov(matrix, len(partition_parsed))
+    new_partition["title"] = "[Generated with Markov] " + partition["title"]
+    views["partition"] = new_partition
+    show_view(views, "partition_details_view")
 
 def pre_play_partition(partition_parsed):
     if apply_inversion_effect.get():
@@ -102,7 +109,7 @@ def load_partition_details_view(window, views):
         btn_save.pack()
         btn_save.place(x=700, y=60)
 
-    btn_markov = Button(actions, text="Generate a partition in this style with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command= markov_action)
+    btn_markov = Button(actions, text="Generate a partition in this style with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
     btn_markov.pack()
     btn_markov.place(x=900, y=60)
 
