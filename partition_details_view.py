@@ -58,7 +58,8 @@ def load_partition_details_view(window, views):
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
 
     btn_back = Button(top_bar, text="Back", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: show_view(views, "partitions_list_view"))
-    if not views["is_in_database"]:
+
+    if not views["is_in_database"] and views["path"] != "partitions.txt":
         btn_back.config(command=lambda: show_view(views, "external_partitions_list_view"))
 
     btn_back.pack()
