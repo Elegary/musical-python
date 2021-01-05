@@ -74,9 +74,6 @@ def parse_partition(partition):
     return partition_infos
 
 def play_partition_parsed(partition_parsed):
-    #print(markov_matrix(partition_parsed))
-    markov = markov_matrix(partition_parsed)
-    #print(generate_with_markov(markov, len(partition_parsed)))
     for i, val, in enumerate(partition_parsed):
         if val["type"] == "note":
             frequency = get_frequency_for_note(val["note"])

@@ -9,6 +9,35 @@ from partition import *
 
 from show_view import show_view
 
+def markov_action(views):
+    db = read_database(views["path"])
+    all_partitions = {"title": "", "infos": ""}
+
+    nbr_notes = 0
+
+    for partition in db:
+        parsed = parse_partition(partition)
+        # Counting number of notes
+        for element in parsed:
+            if element["type"] == "note":
+                nbr_notes += 1
+        all_partitions["infos"] += partition["infos"] + " "
+
+    all_partitions["infos"] = all_partitions["infos"].rstrip()
+
+    partition_parsed = parse_partition(all_partitions)
+    matrix = markov_matrix(partition_parsed)
+
+    length = int(nbr_notes / len(db))
+
+    new_partition = {}
+    new_partition["infos"] = generate_with_markov(matrix, length)
+    new_partition["title"] = "[Generated with Markov] Style from " +  views["path"]
+
+    views["is_in_database"] = False
+    views["partition"] = new_partition
+    show_view(views, "partition_details_view")
+
 def load_external_partition(views):
     path = filedialog.askopenfilename(initialdir=".", title="Select an external partition file", filetypes=[("Text files", "*.txt"),("All Files", "*.*")])
     if path != '':
@@ -39,6 +68,10 @@ def load_partitions_list_view(window, views):
     btn_open = Button(top_bar, text="Open an external database file", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: load_external_partition(views))
     btn_open.pack()
     btn_open.place(x=400, y=15)
+
+    btn_markov = Button(top_bar, text="Generate a partition in the\n style of this Database", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
+    btn_markov.pack()
+    btn_markov.place(x=900, y=10)
 
     btn_infos = Button(top_bar, text="About...", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: show_view(views, "about_view"))
     btn_infos.pack(side=RIGHT, padx=15, pady=20)
