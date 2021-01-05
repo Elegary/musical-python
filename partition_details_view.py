@@ -3,17 +3,24 @@
 #  partition_details_view.py
 
 from tkinter import *
+from tkinter.messagebox import askyesnocancel
 
 from partition import *
 from show_view import show_view
 
-def markov_action(views):
+def markov_action_single(views):
     partition = views["partition"]
     partition_parsed = parse_partition(partition)
     matrix = markov_matrix(partition_parsed)
     new_partition = {}
-    new_partition["infos"] = generate_with_markov(matrix, len(partition_parsed))
-    new_partition["title"] = "[Generated with Markov] From style of " + partition["title"]
+
+    if markov_option.get() == 1:
+        new_partition["infos"] = generate_with_markov_v1(matrix, len(partition_parsed))
+
+    elif markov_option.get() == 2:
+        new_partition["infos"] = generate_with_markov_v2(matrix, len(partition_parsed))
+
+    new_partition["title"] = f"[Generated with Markov V{markov_option.get()}] From style of {partition['title']}"
     views["is_in_database"] = False
     views["partition"] = new_partition
     show_view(views, "partition_details_view")
@@ -39,6 +46,10 @@ def load_partition_details_view(window, views):
     apply_inversion_effect = BooleanVar()
     apply_inversion_effect.set(False)
 
+    # For Markov : 1 = V1, 2 = V2
+    global markov_option
+    markov_option = IntVar()
+    markov_option.set(1)
 
     top_bar = Frame(container, bg="#1DB954")
     top_bar.pack(fill=X)
@@ -111,8 +122,14 @@ def load_partition_details_view(window, views):
         btn_save.pack()
         btn_save.place(x=525, y=60)
 
-    btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
+    btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action_single(views))
     btn_markov.pack()
     btn_markov.place(x=900, y=30)
+
+    radio_v1 = Radiobutton(actions, text="Apply V1", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=1)
+    radio_v2 = Radiobutton(actions, text="Apply V2", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=2)
+
+    radio_v1.place(x=1220, y=45)
+    radio_v2.place(x=1220, y=65)
 
     return container

@@ -110,7 +110,19 @@ def markov_matrix(partition_parsed):
 
     return markov_matrix
 
-def generate_with_markov(markov_matrix, number_of_notes):
+def generate_with_markov_v1(markov_matrix, number_of_notes):
+    note = notes_list[random.randint(0, len(notes_list) - 1)]
+
+    partition_generated = [note.upper() + "n"]
+
+    for i in range(number_of_notes - 1):
+        note_index = notes_list.index(note)
+        note = generate_next_note(markov_matrix, note_index, v2=False)
+        partition_generated.append(note.upper() + "n")
+
+    return " ".join(partition_generated)
+
+def generate_with_markov_v2(markov_matrix, number_of_notes):
     # First get the max occurrences
     index_note_with_max_occurences = 0 # do
     max_occurences = 0
@@ -129,18 +141,21 @@ def generate_with_markov(markov_matrix, number_of_notes):
     partition_generated = [note.upper() + "n"]
     for i in range(number_of_notes - 1):
         note_index = notes_list.index(note)
-        note = generate_next_note(markov_matrix, note_index)
+        note = generate_next_note(markov_matrix, note_index, v2=True)
         partition_generated.append(note.upper() + "n")
 
     return " ".join(partition_generated)
 
 
-def generate_next_note(markov_matrix, note_index):
+def generate_next_note(markov_matrix, note_index, v2):
     array_successor = []
-    for index, note_after_number in enumerate(markov_matrix[note_index]):
-        if note_after_number > 0:
-            to_insert = [notes_list[index]] * note_after_number
-            array_successor.extend(to_insert)
+    for index, occurences in enumerate(markov_matrix[note_index]):
+        if occurences > 0:
+            if v2:
+                to_insert = [notes_list[index]] * occurences
+                array_successor.extend(to_insert)
+            else:
+                array_successor.append(notes_list[index])
 
     return array_successor[random.randint(0, len(array_successor) - 1)]
 

@@ -24,3 +24,11 @@ MIn DOn MIn DOn REc MIc FAc MIn REc SOLn MIn DOn MIn DOn MIn DOn REc MIc FAc MIn
 FAc p Zb FAn FAc FAn FAc DOn FAc SOLn LAn SOLn FAn Zc FAc MIc p Zb REn MIc FAn SOLc LAn SOLc FAn MIn REn DOb DOn Zc DOc SOLc p Zb SOLn SOLc LAn SIn p SIc LAc FAn DOc LAn SOLn Zc SOLc SIc p Zb SIn SIc SIn LAc FAn FAc FAn SOLn DOn FAc FAc FAc MIn REn REn p Zb REn REc FAn FAc SOLn DOn DOc p Zb DOn DOn Zc DOc FAn LAn DOc SIn LAc SOLn FAc DOn DOc DOn FAc FAn FAc MIn REn REc p Zb REn REc FAn FAc SOLn DOn DOc p Zb SOLn DOn Zc DOc FAn LAn DOc SIn LAc SOLn FAc DOn DOc DOn FAn Zn
 #13 Thriller
 FAc SOlr
+#14 [Generated with Markov] Style from partitions.txt
+SOLn FAn FAn MIn REn REn DOn FAn FAn SOLn LAn LAn SOLn SOLn LAn SOLn REn REn DOn REn DOn DOn REn REn SOLn FAn FAn FAn MIn MIn DOn MIn REn MIn DOn REn REn DOn
+#15 Joyeux anniversaire
+SOLc p Zc SOLn LAn SOLn DOn Zc SIb SOLc p Zc SOLn LAn SOLn REn Zc DOb SOLc p Zc SOLn SOLn MIn DOn Zc SIn LAn FAc p Zc FAn MIn DOn REn DOr
+#16 [Generated with Markov] From style of Here is the PIZZA
+SOLn SOLn SOLn SOLn LAn SOLn REn DOn REn DOn SIn SOLn SOLn SOLn SOLn SOLn REn DOn REn DOn REn DOn SOLn SOLn DOn SOLn DOn REn DOn REn DOn SOLn SOLn REn DOn SIn
+#17 [Generated with Markov] From style of [Generated with Markov] From style of Joyeux anniversaire
+SOLn SOLn SOLn SOLn SOLn DOn SOLn MIn DOn REn DOn SIn LAn SOLn DOn SIn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn DOn SOLn SOLn SOLn REn DOn SOLn SOLn SOLn
