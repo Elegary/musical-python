@@ -14,6 +14,7 @@ def markov_action(views):
     new_partition = {}
     new_partition["infos"] = generate_with_markov(matrix, len(partition_parsed))
     new_partition["title"] = "[Generated with Markov] " + partition["title"]
+    views["is_in_database"] = False
     views["partition"] = new_partition
     show_view(views, "partition_details_view")
 
@@ -103,14 +104,14 @@ def load_partition_details_view(window, views):
     if not views["is_in_database"]:
         external_label = Label(actions, text="External partition detected", font=("Segoe UI", 18), fg="white", bg="#1DB954")
         external_label.pack()
-        external_label.place(x=700, y=20)
+        external_label.place(x=525, y=20)
 
         btn_save =  Button(actions, text="Save this partition in the Database", font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: save_new_partition(views["partition"], "partitions.txt"))
         btn_save.pack()
-        btn_save.place(x=700, y=60)
+        btn_save.place(x=525, y=60)
 
-    btn_markov = Button(actions, text="Generate a partition in this style with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
+    btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
     btn_markov.pack()
-    btn_markov.place(x=900, y=60)
+    btn_markov.place(x=900, y=30)
 
     return container
