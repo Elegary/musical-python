@@ -8,19 +8,19 @@ from tkinter.messagebox import askyesnocancel
 from partition import *
 from show_view import show_view
 
-def markov_action_single(views):
+def markov_action_single(views, version):
     partition = views["partition"]
     partition_parsed = parse_partition(partition)
     matrix = markov_matrix(partition_parsed)
     new_partition = {}
 
-    if markov_option.get() == 1:
+    if version == 1:
         new_partition["infos"] = generate_with_markov_v1(matrix, len(partition_parsed))
 
-    elif markov_option.get() == 2:
+    elif version == 2:
         new_partition["infos"] = generate_with_markov_v2(matrix, len(partition_parsed))
 
-    new_partition["title"] = f"[Generated with Markov V{markov_option.get()}] From style of {partition['title']}"
+    new_partition["title"] = f"[Generated with Markov V{version}] From style of {partition['title']}"
     views["is_in_database"] = False
     views["partition"] = new_partition
     show_view(views, "partition_details_view")
@@ -122,12 +122,12 @@ def load_partition_details_view(window, views):
         btn_save.pack()
         btn_save.place(x=525, y=60)
 
-    btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action_single(views))
+    btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action_single(views, markov_option.get()))
     btn_markov.pack()
     btn_markov.place(x=900, y=10)
 
-    radio_v1 = Radiobutton(actions, text="Apply V1", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=1)
-    radio_v2 = Radiobutton(actions, text="Apply V2", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=2)
+    radio_v1 = Radiobutton(actions, text="Generate V1", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=1)
+    radio_v2 = Radiobutton(actions, text="Generate V2", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=2)
 
     radio_v1.place(x=950, y=95)
     radio_v2.place(x=1050, y=95)

@@ -32,3 +32,5 @@ SOLc p Zc SOLn LAn SOLn DOn Zc SIb SOLc p Zc SOLn LAn SOLn REn Zc DOb SOLc p Zc 
 SOLn SOLn SOLn SOLn LAn SOLn REn DOn REn DOn SIn SOLn SOLn SOLn SOLn SOLn REn DOn REn DOn REn DOn SOLn SOLn DOn SOLn DOn REn DOn REn DOn SOLn SOLn REn DOn SIn
 #17 [Generated with Markov] From style of [Generated with Markov] From style of Joyeux anniversaire
 SOLn SOLn SOLn SOLn SOLn DOn SOLn MIn DOn REn DOn SIn LAn SOLn DOn SIn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn SOLn DOn SOLn SOLn SOLn REn DOn SOLn SOLn SOLn
+#18 [Generated with Markov V1] Style from partitions.txt
+REn MIn SOLn REn LAn LAn FAn LAn FAn LAn SOLn SIn DOn DOn SIn SIn SIn SOLn FAn REn LAn LAn REn SIn SOLn REn FAn SOLn MIn MIn SOLn SOLn MIn DOn REn SIn DOn

@@ -12,7 +12,7 @@ def load_partition_view(views, partition):
     views["partition"] = partition
     show_view(views, "partition_details_view")
 
-def markov_action(views):
+def markov_action(views, version):
     db = read_database(views["path"])
     all_partitions = {"title": "", "infos": ""}
 
@@ -34,8 +34,14 @@ def markov_action(views):
     length = int(nbr_notes / len(db))
 
     new_partition = {}
-    new_partition["infos"] = generate_with_markov(matrix, length)
-    new_partition["title"] = "[Generated with Markov] Style from " + Path(views["path"]).name
+
+    if version == 1:
+        new_partition["infos"] = generate_with_markov_v1(matrix, length)
+
+    elif version == 2:
+        new_partition["infos"] = generate_with_markov_v2(matrix, length)
+
+    new_partition["title"] = f"[Generated with Markov V{version}] Style from {Path(views['path']).name}"
 
     views["is_in_database"] = False
     views["partition"] = new_partition

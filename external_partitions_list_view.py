@@ -11,6 +11,11 @@ from show_view import show_view
 def load_external_partitions_list_view(window, views):
     container = Frame(window)
 
+    # For Markov : 1 = V1, 2 = V2
+    global markov_option
+    markov_option = IntVar()
+    markov_option.set(1)
+
     top_bar = Frame(container, bg="#1DB954")
     top_bar.pack(fill=X)
     top_bar.config(height=80)
@@ -32,9 +37,15 @@ def load_external_partitions_list_view(window, views):
     btn_back.pack()
     btn_back.place(x=600, y=15)
 
-    btn_markov = Button(top_bar, text="Generate a partition in the\n style of this Database", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views))
+    btn_markov = Button(top_bar, text="Generate a partition in the\n style of this Database", font=("Segoe UI", 13), fg="#FFFFFF", bg="#191414", command=lambda: markov_action(views, markov_option.get()))
     btn_markov.pack()
     btn_markov.place(x=900, y=10)
+
+    radio_v1 = Radiobutton(top_bar, text="Generate V1", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=1)
+    radio_v2 = Radiobutton(top_bar, text="Generate V2", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=2)
+
+    radio_v1.place(x=800, y=20)
+    radio_v2.place(x=800, y=40)
 
     main_frame = Frame(container, bg="#191414")
     main_frame.place(x=0, y=80)
