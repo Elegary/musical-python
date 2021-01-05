@@ -124,12 +124,12 @@ def load_partition_details_view(window, views):
 
     btn_markov = Button(actions, text="Generate a partition in this style\n with Markov chains",  font=("Segoe UI", 15), fg="#FFFFFF", bg="#191414", command=lambda: markov_action_single(views))
     btn_markov.pack()
-    btn_markov.place(x=900, y=30)
+    btn_markov.place(x=900, y=10)
 
     radio_v1 = Radiobutton(actions, text="Apply V1", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=1)
     radio_v2 = Radiobutton(actions, text="Apply V2", bg="#1DB954", activebackground="#1DB954", variable=markov_option, value=2)
 
-    radio_v1.place(x=1220, y=45)
-    radio_v2.place(x=1220, y=65)
+    radio_v1.place(x=950, y=95)
+    radio_v2.place(x=1050, y=95)
 
     return container
